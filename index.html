@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<title>БезЦукру — щоденник відмови від солодкого</title>
+
+<!-- PWA (fully self-contained: manifest and icons are inlined as data URIs) -->
+<link rel="manifest" href="data:application/manifest+json;charset=utf-8;base64,eyJuYW1lIjogItCR0LXQt9Cm0YPQutGA0YMg4oCUINGJ0L7QtNC10L3QvdC40Log0LLRltC00LzQvtCy0Lgg0LLRltC0INGB0L7Qu9C+0LTQutC+0LPQviIsICJzaG9ydF9uYW1lIjogItCR0LXQt9Cm0YPQutGA0YMiLCAiZGVzY3JpcHRpb24iOiAi0KLRgNC10LrQtdGAINCy0ZbQtNC80L7QstC4INCy0ZbQtCDRhtGD0LrRgNGDOiDRgdC10YDRltGXINCx0LXQtyDQt9GA0LjQstGW0LIsINGC0Y/Qs9CwIFNPUywg0L7RgdC+0LHQuNGB0YLRliDQv9GA0LjRh9C40L3QuC4iLCAic3RhcnRfdXJsIjogIi4iLCAic2NvcGUiOiAiLiIsICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLCAib3JpZW50YXRpb24iOiAicG9ydHJhaXQiLCAiYmFja2dyb3VuZF9jb2xvciI6ICIjMUIwRjE4IiwgInRoZW1lX2NvbG9yIjogIiMxQjBGMTgiLCAibGFuZyI6ICJ1ayIsICJpY29ucyI6IFt7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQU1BQUFBREFDQVlBQUFCUzNHd0hBQUFGQ1VsRVFWUjRuTzNjdlhFYlJ4ekc0UU5IdVZMT3lKRmJjS0tJTmJnRGRlQmkxQUU3Y0EyS21MZ0ZSOVlNVTFVZ0J4cEsvTUFCOTdGN2U3ZnY4K1RDSFlIL2IzY0JFam9OTy9QaC9lMzMxdmRBUFYrL1BaNWEzOE56VFcvR3NETU1iYVBZL01LR25rdTJqbUd6aXhsODV0Z3FoT29YTWZpc1VUdUVhZzl1OENtcFZnakZIOVRnVTFQcEVHNUtQcGpocDdiU00xYWtKb05QQ3lWMmc5VTdnT0dubFJLenR5b0F3MDlyYTJkd2NRQ0duNzFZTTR1TEFqRDg3TTNTbVp3ZGdPRm5yNWJNNXF3QUREOTdOM2RHSndkZytEbUtPYk02S1FERHo5Rk1uZG1yQVJoK2ptcks3QmI5VXdnNG1vc0JXUDA1dW1zelBCcUE0YWNYbDJiWkVZaG9ad093K3RPYnNabTJBeER0VFFCV2YzcDFicmJ0QUVSN0VZRFZuOTY5bm5FN0FORitCbUQxSjhYeldiY0RFRTBBUkxzWkJzY2Y4anpOdkIyQWFBSWcycnZXTjdCSEQvZDNyVytobW8rZnZyUytoVjJ4QTd6UzgvQVBRLzgvMzF3bmI0Qi9TUm9PTzhFUGRnQ2lDWUJvQWlDYUFJZ21BS0lKZ0dnQ0lKb0FpQ1lBb2dtQWFBSjRKdVhQQTFKK3ppa0U4RXJ2dzlIN3p6ZVhQNFlqbWgyQWFBSWdtZ0NJSmdDaUNZQm8wVitLVC9vSzVDWEpINDFHN2dBRy82V0grN3ZZNXlUdTl3Q3BML1JVYWJ0QjVBNEFUNklDc1BwZmwvWWNSYjhKZnBLMjdUOFpHL2FIKzd1WTV5Um1CeGg3c1ZOZTZIT1NmL1luRVFFWS9uRmp6MEhLVVNnaUFKWkppS0Q3QUt6KzF5VS9GMTBIa0xDQ2xaSjZGT282Z0RISks5NFNQVWZRYlFDT1B2TWxQamZkQnNBeWFVZWhMZ093K3RmUll3VGRCV0Q0MTB0NnJyb0xnREpTamtKZEJXRDEzMFpQRVhRVFFFOHZ5bDRrTEJ6ZEJEQW00VVdzcWZlalVCY0JPUHEwMFVNRVhRUkFYVDB2SkljUHdPcS9qVjZQUW9jT3dQRHZ3NUVqT0hRQWJLdkhoZVd3QVZqOTIranRLSFRZQUtDRXJnS3crbStqcCtlNXF3QmdMZ0VRVFFCRUV3RFJCRUEwQVJCTkFFUVRBTkVFUURRQkVFMEFSQk1BMFFSQU5BRVFUUUJFRXdEUkJFQTBBUkJOQUVRVEFORUVRRFFCRUUwQVJCTUEwUVJBdEhldGI2QjNmLy8xKytySCtQUHp2d1h1aEhQc0FCV1ZHUDZTajhOYkFxaWs5TkNLb0E0QkVFMEFSQk1BMFFSQU5BRVFUUUJFRXdEUkJFQTBBUkJOQUVRVEFORUVRRFFCRUUwQVJCTUEwUVJBTkFGVVV2cHJqTDRXV1ljQUtpbzF0SWEvSGwrS3I4enc3cHNkZ0dnQ0lKb2owRXhyLzNlR0tVZWlMYTdCRDNhQUdVcjgxeVRYSG1PTGEvQ0xBQ1lxT1ZSamo3WEZOWGhKQUVRVEFORUVRRFFCRUUwQVJCTUEwUVJBTkFFUVRRQkVFd0RSQkVBMEFSQk5BRVFUQU5FRVFEUUJURlR5VzFaamo3WEZOWGpwOU9IOTdmZldON0hFdy8xZGsrcysvdlBmcW45Lys4ZHZ1N2hHRFI4L2ZXbHkzVFY4SjNpbUxZYXIxUUFuY2dRaW1nQW80b2pIbjJFNGNBQkhmY0o3ZE9UWDRqUU13M0RVTjhLd3h0ZHZqNmZEN2dCUWdnQ0lKZ0NpQ1lCb044UHc0ODFBNnh1QkxUM052QjJBYUFJZzJzOEFISU5JOFh6VzdRQkVleEdBWFlEZXZaNXhPd0RSM2dSZ0Y2Qlg1MmJiRGtDMHN3SFlCZWpOMkV6YkFZZzJHb0JkZ0Y1Y211V0xPNEFJT0xwck0rd0lSTFNyQWRnRk9Lb3BzenRwQnhBQlJ6TjFaaWNmZ1VUQVVjeVoxVm52QVVUQTNzMmQwZGx2Z2tYQVhpMlp6VVdmQW9tQXZWazZrNHMvQmhVQmU3Rm1GbGY5SGtBRXRMWjJCbGYvSWt3RXRGSmk5b29Pci85amxDMlVYSFNML2ltRTNZRGFTczlZdFlHMUcxQlNyY1cxK29vdEJOYW9mYXJZN01naUJPYlk2amk5K1psZENGeXk5ZnZJcG05YXhjQXd0UDN3WkhlZjJvaWliM3Y3cFBCL08zMTVKeXdTemdRQUFBQUFTVVZPUks1Q1lJST0iLCAic2l6ZXMiOiAiMTkyeDE5MiIsICJ0eXBlIjogImltYWdlL3BuZyIsICJwdXJwb3NlIjogImFueSJ9LCB7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQWdBQUFBSUFDQVlBQUFEMGVOVDZBQUFQbjBsRVFWUjRuTzNkdmJFVVJ4aUcwYmtVUGk1VmVJb0NpeGlVQVJrb0dHVkFCb29CaXlqa1VZVkxCTWlnRnUyOTdOL01kRS8vdk9kWU1udjc3czczVE0reWVscm8wcnMzYjMrMFhnTkFDVisvZjN0cXZRWis1NC9TaUFFUDhKTkFhTU9tSDhDd0IxaEhGTlJuZ3lzdzhBSEtFZ1RsMmRBQ0RIeUFZd21DL1d6Z1JvWStRQi9Fd0RZMmJRVkRINkJ2WXVCeE51b09ReDlnVEdMZ05wdHpoY0VQTUFjaGNKbE5PV1BvQTh4TkRQelBSaXdHUDBBYUlSQWVBQVkvUUxia0VJaDg0UVkvQU9jU1F5RHFCUnY4QU55U0ZBSVJMOVRnQjJDTmhCQjQxWG9CdFJuK0FLeVZNRHVtTFp5RVB4NEE5YzE2R2pEZGl6TDRBYWhodGhDWTZoR0E0UTlBTGJQTm1DbHFaclkvQ2dCOW0rRTBZUGdUQU1NZmdLUE5NSHVHRG9BWi9nQUFqR24wR1RUa0VjYm9tdzdBWEVaOEpERGNDWURoRDBCdlJweE5Rd1hBaUJzTVFJYlJadFFRUnhhamJTb0EyVVo0Sk5EOUNZRGhEOEJvUnBoZFhRZkFDQnNJQUpmMFBzTzZEWURlTnc0QTd1bDVsblVaQUQxdkdBQ3MwZXRNNnk0QWV0MG9BTmlxeDluV1ZRRDB1RUVBVUVKdk02NmJBT2h0WXdDZ3RKNW1YUmNCME5PR0FFQk52Y3k4NWdIUXkwWUF3RkY2bUgxTkE2Q0hEUUNBRmxyUHdHWUIwUHFGQTBCckxXZGhrd0F3L0FIZ3AxWXo4ZkFBTVB3QjRMa1dzL0hRQUREOEFlQ3lvMmZrWVFGZytBUEFiVWZPeWtNQ3dQQUhnTWNjTlRPYi93NEFBSEM4NmdIZzdoOEExamxpZGxZTkFNTWZBTGFwUFVPckJZRGhEd0Q3MUp5bHZnTUFBSUdxQklDN2Z3QW9vOVpNTFI0QWhqOEFsRlZqdGhZTkFNTWZBT29vUFdOOUJ3QUFBaFVMQUhmL0FGQlh5VmxiSkFBTWZ3QTRScW1aNnhFQUFBVGFIUUR1L2dIZ1dDVm1yeE1BQUFpMEt3RGMvUU5BRzN0bjhPWUFNUHdCb0swOXM5Z2pBQUFJdENrQTNQMERRQisyem1RbkFBQVFhSFVBdVBzSGdMNXNtYzFPQUFBZzBLb0FjUGNQQUgxYU82T2RBQUJBb0ljRHdOMC9BUFJ0emF4MkFnQUFnUjRLQUhmL0FEQ0dSMmUyRXdBQUNDUUFBQ0RRM1FCdy9BOEFZM2xrZGpzQkFJQkFOd1BBM1Q4QWpPbmVESGNDQUFDQkJBQUFCTG9hQUk3L0FXQnN0MmE1RXdBQUNDUUFBQ0RReFFCdy9BOEFjN2cyMDUwQUFFQWdBUUFBZ1g0TEFNZi9BRENYUzdQZENRQUFCQklBQUJCSUFBQkFvR2NCNFBrL0FNenA1WXgzQWdBQWdRUUFBQVFTQUFBUTZGY0FlUDRQQUhNN24vV3ZXeTRFanZMbDA0ZldTMkF3N3o5K2JyMEVxT3JwOUI5T0FKaVJ3YzllUW9EWmZQMys3V2xaZkFlQWlSbitsT0I5eEt3RUFGTnkwYVlrN3lkbTlHcFpIUDh6RnhkcmF2QytZaGFubWU4RWdLbTRTRk9UOXhjekVRQUFFRWdBTUExM1p4ekIrNHhaQ0FBQUNDUUFBQ0NRQUFDQVFBSUFBQUs5OGhzQUFKRGwzWnUzUDV3QUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQVRPUDl4OCt0bDBBQTd6Tm1JUUFBSUpBQVlDcnV6cWpKKzR1WkNBQ200eUpORGQ1WHpFWUFNQ1VYYTByeWZtSkdBb0JwdVdoVGd2Y1JzM3A2OStidGo5YUxnTnErZlByUWVna014dUJuZGdJQUFBSjVCQUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUtEWHJSY0F0M3o1OUtIMUVtQ3o5eDgvdDE0Q1hPVUVBS0NTTDU4K2lGaTZKUUFBS2hNQjlFZ0EwQTBYU1dibU5JRGVDQUM2Y0xvd3VrZ3lPKzl2ZWlFQTZKS0xKRUJkVCsvZXZQM1JlaEZrTSt4SjVGOEkwSm9UQUlBR2hDK3RDUUNhY2hFRWFFTUEwSXpoVHpxZkFWb1NBQUFRU0FEUWhEc2YrTWxuZ1ZZRUFJZHp3WVBuZkNab1FRQUFRQ0MvQThDaDl0N3ArTGZUOU16N201RTRBUURvaEVjQkhFa0FjQmgzUjh6T2U1U1JDQUFPNGM0R0h1T3p3bEVFQUVOd1o4VW9TcnhYUlFCSEVBQlU1K2lmTk42empFQUFVSlU3R2RqR1o0ZmFCQUJkY3lmRnFEd0tvSGNDZ0dvYy9aUE9lNWllQ1FDQWpqa0ZvQllCUUJYdS91RW43MlY2SlFBb3poMExQTGMzQW55bXFFRUEwQjEzVFBBN0VVQnBBb0NpSFAzRFpkN2I5RVlBVUl3N0ZMak5vd0I2SWdEb2hqc2t1RThFVUlvQW9BaEgvL0FZNzNWNklRQUFCdU1VZ0JJRUFMdTUrNGQxL0V3d1BSQUE3T0lpQk5zSVgxb1RBRFRsSWdqYkNYRDJFQUJzNXVnZjl2RVpvQ1VCd0NidVBLQU12dzFBS3dLQUp0ejVRRGtpZ0MwRUFLczUrb2V5ZkNab1FRQUFkTUNqQUk0bUFGakYzVC8wU3dTd2hnRGdZUzR1VUpkQTVrZ0NnTU80dU1GOUhnVndGQUhBUXh6OXd6aEVBSThRQU56bFlnTEhFc3djUVFCUW5Zc1pIRSs0YzQ4QTRDWkgvOUNHLzJNZ3RRa0FnRTRKYUdvU0FGemw3aC9HNXhTQWF3UUFGN2xvUUIrRU5MVUlBS3B3MFlKeS9EWUFOUWdBZnVQb0grWWpBbmhKQVBDTWl3VDBTVmhUbWdDZ0tCY3BxTWVqQUVvU0FQemk2Qi9tSndJNEVRQUFBeEhhbENJQVdKYkYzVDhrY1FyQXNnZ0FGaGNER0kyZkNhWUVBY0J1N3Y3aGVENTM3Q1VBd2puNmgxeE9BYklKZ0dBKy9EQTJqd0xZUXdDd21idC9hTS9ua0swRVFDaEgvOENKVTRCTUFnQmdjSUtjTFFSQUlIZi9NQjgvRTh4YUFpQ01Eemx3amV0REZnSEFLdTcrb1Y4K242d2hBSUk0K29mNWVSVEFvd1FBQUFRU0FDSGMvVU1PcHdBOFFnQndsK0VQTUI4QkFEQWg0YzQ5QW9DYlhFUmdYRDYvM0NJQUFDQ1FBQUNBUUFJQUFBSUpBQUFJSkFBQUlKQUFBSUJBQWdBQUFna0FBQWdrQUFBZ2tBQUFnRUFDQUFBQ0NRQUFDQ1FBQUNDUUFBQ0FRQUlBQUFJSkFBQUlKQUFBSUpBQUFJQkFBZ0FBQWdrQUFBZ2tBQUFna0FBQWdFQUNBQUFDQ1FBQUNDUUFBQ0NRQUFDQVFBSUFBQUlKQUFBSUpBQUFJSkFBQUlCQUFnQUFBZ2tBQUFna0FBQWdrQUFBZ0VBQ0FBQUNDUUFBQ0NRQUFDQ1FBQUNBUUFJQUFBSUpBQUFJSkFBQUlKQUFBSUJBQWdBQUFna0FBQWdrQUFBZ2tBQUFnRUFDQUFBQ0NRQUFDQ1FBQUNDUUFBQ0FRQUlBQUFJSkFBQUlKQUFBSUpBQUFJQkFBZ0FBQWdrQUFBZ2tBQUFna0FBQWdFQUNBQUFDQ1FBQUNDUUFBQ0NRQUFDQVFBSUFBQUlKQUFBSUpBQUFJSkFBQUlCQUFnQUFBZ2tBQUFna0FBQWdrQUFBZ0VDdld5OEFXT2Vmdi81b3ZZU3Ivdno3MzlaTEFCNGtBR0FRUFEvK2s5TWFoUUQwenlNQUdNQUl3Ly9jYU91RlJBSUFPamZxTUIxMTNaQkNBRURIUmgraW82OGZaaVlBb0ZPekRNOVpYZ2ZNUmdBQVFDQUJBQjJhN2E1NXR0Y0RNeEFBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFFQ0gvdno3MzlaTEtHcTIxd016RUFBQUVFZ0FRS2RtdVd1ZTVYWEFiQVFBZEd6MDRUbjYrbUZtQWdBNk4rb1FIWFhka0VJQXdBQkdHNmFqclJjU3ZXNjlBT0F4cDZINnoxOS9ORjdKZFFZL2pFTUF3R0FNV2FBRWp3QUFJSkFBQUlCQUFnQUFBZ2tBQUFna0FBQWdrQUFBZ0VBQ0FBQUNDUUFBQ0NRQUFDQ1FYd0tFRlhyOUdkNFd2dzVvTDJCc0FnQWUwT3V3T3ptdDc0amhaeTlnRGg0QndCMjlEN3h6dGRkcUwyQWVBZ0J1R0hHSTFGcXp2WUM1Q0FDNFl1VGhVWHJ0OWdMbUl3RGdnaG1HUnFuWFlDOWdUZ0lBQUFJSkFIaGhwcnZGdmEvRlhzQzhCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQThNS2ZmLy9iZWduRjdIMHQ5Z0xtSlFBQUlKQUFnQXRtdUZzczlScnNCY3hKQU1BVkl3K04wbXUzRnpBZkFRQTNqRGc4YXEzWlhzQmNCQURjTWRJUXFiMVdld0h6ZU4xNkFUQ0MwekQ1NTY4L0dxL2tzaU9IbmIyQU9UeTllL1AyUit0RlVOK1hUeDlhTHdFWXlQdVBuMXN2Z2NvOEFnQ0FRQUlBQUFJSkFBQUlKQUFBSUpBQUFJQkFBZ0FBQXIzNit2M2JVK3RGQUFESCtmcjkyNU1UQUFBSUpBQkMrRkVQNEZHdUZ4a0VRQkFmYXVBZTE0a2NBaUNNRHpkd2pldERGZ0VReUljY2VNbDFJYy9Uc2l5TC95RlFMditUSU1obThHZjYrdjNia3dBQWdEQy8vaG1nM3dJQWdBeW5tZTg3QUFBUVNBQUFRQ0FCQUFDQkJBQUFCUG9WQUw0SUNBQnpPNS8xVGdBQUlKQUFBSUJBQWdBQUFqMExBTjhEQUlBNXZaenhUZ0FBSUpBQUFJQkFBZ0FBQXYwV0FMNEhBQUJ6dVRUYm5RQUFRQ0FCQUFDQkxnYUF4d0FBTUlkck05MEpBQUFFRWdBQUVPaHFBSGdNQUFCanV6WExuUUFBUUNBQkFBQ0JiZ2FBeHdBQU1LWjdNOXdKQUFBRXVoc0FUZ0VBWUN5UHpHNG5BQUFRU0FBQVFLQ0hBc0JqQUFBWXc2TXoyd2tBQUFSNk9BQ2NBZ0JBMzliTWFpY0FBQkJvVlFBNEJRQ0FQcTJkMFU0QUFDRFE2Z0J3Q2dBQWZka3ltNTBBQUVDZ1RRSGdGQUFBK3JCMUpqc0JBSUJBbXdQQUtRQUF0TFZuRnU4NkFSQUJBTkRHM2huc0VRQUFCTm9kQUU0QkFPQllKV2F2RXdBQUNGUWtBSndDQU1BeFNzM2NZaWNBSWdBQTZpbzVhejBDQUlCQVJRUEFLUUFBMUZGNnhoWS9BUkFCQUZCV2pkbGE1UkdBQ0FDQU1tck5WTjhCQUlCQTFRTEFLUUFBN0ZOemxsWTlBUkFCQUxCTjdSbGEvUkdBQ0FDQWRZNlluYjREQUFDQkRna0Fwd0FBOEppalp1WmhKd0FpQUFCdU8zSldIdm9JUUFRQXdHVkh6OGpEdndNZ0FnRGd1UmF6c2NtWEFFVUFBUHpVYWlZMisxY0FJZ0NBZEMxbllkTi9CaWdDQUVqVmVnWTIveDJBMWhzQUFFZnJZZlkxRDRCbDZXTWpBT0FJdmN5OExnSmdXZnJaRUFDb3BhZFoxMDBBTEV0Zkd3TUFKZlUyNDdvS2dHWHBiNE1BWUs4ZVoxdDNBYkFzZlc0VUFHelI2MHpyTWdDV3BkOE5BNEJIOVR6THVnMkFaZWw3NHdEZ2x0NW5XTmNCc0N6OWJ5QUF2RFRDN09wK2dlZmV2WG43by9VYUFPQ2FFUWIvU2ZjbkFPZEcybGdBc293Mm80WUtnR1VaYjRNQm1OK0lzMm00QlovelNBQ0Fsa1ljL0NmRG5RQ2NHM25qQVJqYjZETm82QUJZbHZIL0FBQ01aNGJaTS93TE9PZVJBQUExelRENFQ0WS9BVGczMHg4R2dMN01ObU9tZWpIbm5BWUFVTUpzZy85a3loZDFUZ2dBc01Xc2cvOWtxa2NBbDh6K0J3U2d2SVRaTWYwTFBPYzBBSUJiRWdiL1Njd0xQU2NFQURpWE5QaFA0bDd3T1NFQWtDMXg4Si9FdnZCelFnQWdTL0xnUDRuZmdITkNBR0J1QnYvL2JNUVZZZ0JnRG9iK1pUYmxEaUVBTUNhRC96YWJzNElZQU9pYm9mODRHN1dSR0FEb2c2Ry9qVTByUUF3QUhNdlEzODhHVmlBSUFNb3k4TXV6b1FjUUJBRHJHUGoxMmVCR1JBSEFUNFo5R3phOVV3SUJtSVVCMzZmL0FQajU0YWZkM0N0QUFBQUFBRWxGVGtTdVFtQ0MiLCAic2l6ZXMiOiAiNTEyeDUxMiIsICJ0eXBlIjogImltYWdlL3BuZyIsICJwdXJwb3NlIjogImFueSJ9LCB7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQWdBQUFBSUFDQVlBQUFEMGVOVDZBQUFMNTBsRVFWUjRuTzNkelczY09BQ0FVV2ZoZTY0QmNrc1ZPYm1HZEpBT1VrdzZjQWVwSVNkWGtWYThoNFVYbTZ4L3hoNXBLUEo3cndLT0lKRWZLVmgrOS9IOWgvc3JBQ0RscjlFREFBQXVUd0FBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FBQVFKQUFBSUFnQVFBQVFRSUFBSUlFQUFBRUNRQUFDQklBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FBQVFKQUFBSUFnQVFBQVFRSUFBSUlFQUFBRUNRQUFDQklBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FBQVFKQUFBSUFnQVFBQVFRSUFBSUlFQUFBRUNRQUFDQklBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnNkhyMEFPQVM3bTV2UmcrQnlYeisrblAwRUdCWDd6NisvM0EvZWhDd0Z3cy81eElDck1vckFKWmw4V2NMN2lOV0pRQllra21iTGJtZldKRUFZRGttYS9iZ3ZtSTFBb0NsbUtUWmsvdUxsUWdBQUFnU0FDekQ3b3hMY0oreENnRUFBRUVDQUFDQ0JBQUFCQWtBQUFnU0FBQVFKQUFBSUVnQUFFQ1FBQUNBSUFFQUFFRUNBQUNDQkFBQUJBa0FBQWdTQUFBUUpBQUFJRWdBQUVDUUFBQ0FJQUVBQUVFQ0FBQ0NCQUFBQkFrQUFBZ1NBQUFRSkFBQUlFZ0FBRUNRQUFDQUlBSEFNajUvL1RsNkNBUzR6MWlGQUFDQUlBSEFVdXpPMkpQN2k1VUlBSlpqa21ZUDdpdFdJd0JZa3NtYUxibWZXSkVBWUZrbWJiYmdQbUpWN3o2Ky8zQS9laEN3dDd2Ym05RkRZRElXZmxZbkFBQWd5Q3NBQUFnU0FBQVFKQUFBSUVnQUFFQ1FBQUNBSUFFQUFFRUNBQUNDQkFBQUJBa0FBQWdTQUFBUUpBQUFJRWdBQUVDUUFBQ0FJQUVBQUVFQ0FBQ0NCQUFBQkYyUEhnQTg1KzcyWnZRUTRNMCtmLzA1ZWdqd0pDY0FBRHU1dTcwUnNSeVdBQURZbVFqZ2lBUUFoMkdTWkdWT0F6Z2FBY0FoUEV5TUprbFc1LzdtS0FRQWgyU1NCTmpYdTQvdlA5eVBIZ1J0Rm51Sy9JVUFvemtCQUJoQStES2FBR0Fva3lEQUdBS0FZU3orMUhrR0dFa0FBRUNRQUdBSU94LzRoMmVCVVFRQUYyZkNnOTk1SmhoQkFBQkFrTzhBY0ZIbjduVDg3VFJINXY1bUprNEFBQTdDcXdBdVNRQndNWFpIck00OXlrd0VBQmRoWndPbjhheHdLUUtBS2RoWk1Zc3Q3bFVSd0NVSUFIYm42SjhhOXl3ekVBRHN5azRHM3Nhenc5NEVBSWRtSjhXc3ZBcmc2QVFBdTNIMFQ1MTdtQ01UQUFBSDVoU0F2UWdBZG1IM0QvOXdMM05VQW9ETjJiSEE3ODZOQU04VWV4QUFISTRkRS95ZkNHQnJBb0JOT2ZxSHg3bTNPUm9Cd0dic1VPQjVYZ1Z3SkFLQXc3QkRncGVKQUxZaUFOaUVvMzg0alh1ZG94QUFBSk54Q3NBV0JBQm5zL3VIMS9HWllJNUFBSEFXa3hDOGpmQmxOQUhBVUNaQmVEc0J6amtFQUcvbTZCL080eGxnSkFIQW05aDV3RFo4RzRCUkJBQkQyUG5BZGtRQWJ5RUFlRFZILzdBdHp3UWpDQUNBQS9BcWdFc1RBTHlLM1Q4Y2x3amdOUVFBSnpPNXdMNEVNcGNrQUxnWWt4dTh6S3NBTGtVQWNCSkgvekFQRWNBcEJBQXZNcG5BWlFsbUxrRUFzRHVUR1Z5ZWNPY2xBb0JuT2ZxSE1mekhRUFltQUFBT1NrQ3pKd0hBayt6K1lYNU9BWGlLQU9CUkpnMDRCaUhOWGdRQXV6QnB3WFo4RzRBOUNBRCt4OUUvckVjRThDY0J3RzlNRW5CTXdwcXRDUUEyWlpLQy9YZ1Z3SllFQVA5eTlBL3JFd0U4RUFBQUV4SGFiRVVBY0hWMVpmY1BKVTRCdUxvU0FGeVpER0EyUGhQTUZnUUFaN1A3aDh2ejNIRXVBUkRuNkIrNm5BSzBDWUF3RHovTXphc0F6aUVBZURPN2Z4alBjOGhiQ1lBb1IvL0FBNmNBVFFJQVlIS0NuTGNRQUVGMi83QWVud25tdFFSQWpJY2NlSXI1b1VVQThDcDIvM0Jjbms5ZVF3Q0VPUHFIOVhrVndLa0VBQUFFQ1lBSXUzL29jQXJBS1FRQUw3TDRBNnhIQUFBc1NManpFZ0hBczB3aU1DL1BMODhSQUFBUUpBQUFJRWdBQUVDUUFBQ0FJQUVBQUVFQ0FBQ0NCQUFBQkFrQUFBZ1NBQUFRSkFBQUlFZ0FBRUNRQUFDQUlBRUFBRUVDQUFDQ0JBQUFCQWtBQUFnU0FBQVFKQUFBSUVnQUFFQ1FBQUNBSUFFQUFFRUNBQUNDQkFBQUJBa0FBQWdTQUFBUUpBQUFJRWdBQUVDUUFBQ0FJQUVBQUVFQ0FBQ0NCQUFBQkFrQUFBZ1NBQUFRSkFBQUlFZ0FBRUNRQUFDQUlBRUFBRUVDQUFDQ0JBQUFCQWtBQUFnU0FBQVFKQUFBSUVnQUFFQ1FBQUNBSUFFQUFFRUNBQUNDQkFBQUJBa0FBQWdTQUFBUUpBQUFJRWdBQUVDUUFBQ0FJQUVBQUVFQ0FBQ0NCQUFBQkFrQUFBZ1NBQUFRSkFBQUlFZ0FBRUNRQUFDQUlBRUFBRUVDQUFDQ0JBQUFCQWtBQUFnU0FBQVFKQUFBSUVnQUFFQ1FBQUNBSUFFQUFFRUNBQUNDcmtjUEFIaWRIOTgralI3Q2s3NTgvelY2Q01DSkJBQk00c2dMLzRPSE1Rb0JPRDZ2QUdBQ015eisvelhiZUtGSUFNREJ6YnFZempwdXFCQUFjR0N6TDZLemp4OVdKZ0Rnb0ZaWlBGZjVIYkFhQVFBQVFRSUFEbWkxWGZOcXZ3ZFdJQUFBSUVnQUFFQ1FBQUNBSUFFQUFFRUNBQUNDQkFBQUJBa0FBQWdTQUFBUUpBQUFJRWdBQUVDUUFBQ0FJQUVBQUVFQ0FBQ0NCQUFBQkFrQUFBZ1NBQUFRSkFBQUlFZ0FBRUNRQUFDQUlBRUFBRUVDQUFDQ0JBQUFCQWtBQUFnU0FBQVFKQUFBSUVnQUFFQ1FBQUNBSUFFQUFFRUNBQUNDQkFBQUJBa0FBQWdTQUFBUUpBQUFJRWdBQUVDUUFBQ0FJQUVBQUVFQ0FBQ0NCQUFjMEpmdnYwWVBZVk9yL1I1WWdRQUFnQ0FCQUFlMXlxNTVsZDhCcXhFQWNHQ3pMNTZ6ang5V0pnRGc0R1pkUkdjZE4xUUlBSmpBYkl2cGJPT0ZvdXZSQXdCTzg3Q28vdmoyYWZCSW5tYmhoM2tJQUppTVJSYllnbGNBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkRrUzREd0NrZjlETytJcndPNkZqQTNBUUFuT09waTkrQmhmSmRZL0Z3TFdJTlhBUENDb3k5NC83WDNXRjBMV0ljQWdHZk11SWpzTldiWEF0WWlBT0FKTXk4ZVc0L2R0WUQxQ0FCNHhBcUx4bGEvd2JXQU5Ra0FBQWdTQVBDSGxYYUw1LzRXMXdMV0pRQUFJRWdBQUVDUUFBQ0FJQUVBQUVFQ0FBQ0NCQUFBQkFrQUFBZ1NBQUFRSkFBQUlFZ0FBRUNRQUFDQUlBRUFBRUVDQUFDQ0JBQUFCQWtBQUFnU0FBQVFKQUFBSUVnQUFFQ1FBQUNBSUFFQUFFRUNBQUNDQkFBQUJBa0FBQWdTQUFBUUpBQUFJRWdBQUVDUUFBQ0FJQUVBQUVFQ0FBQ0NCQUFBQkFrQUFBZ1NBQUFRSkFBQUlFZ0FBRUNRQUFDQUlBRUFBRUVDQUFDQ0JBRDg0Y3YzWDZPSHNKbHpmNHRyQWVzU0FBQVFKQURnRVN2c0ZyZjZEYTRGckVrQXdCTm1YalMySHJ0ckFlc1JBUENNR1JlUHZjYnNXc0JhQkFDOFlLWkZaTyt4dWhhd2p1dlJBNEFaUEN3bVA3NTlHanlTeDExeXNYTXRZQTN2UHI3L2NEOTZFT3p2N3ZabTlCQ0FpWHorK25QMEVOaVpWd0FBRUNRQUFDQklBQUJBa0FBQWdDQUJBQUJCQWdBQWdnUUFBQVFKQUFBSUVnQVJQdW9Cbk1wODBTQUFRanpVd0V2TUV4MENJTWJERFR6Ri9OQWlBSUk4NU1DZnpBczkvaGxRbkg4U0JHMFcvaTRCQUFCQlhnRUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FBQVFKQUFBSUFnQVFBQVFRSUFBSUlFQUFBRUNRQUFDQklBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FBQVFKQUFBSUFnQVFBQVFRSUFBSUlFQUFBRUNRQUFDQklBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FBQVFKQUFBSUFnQVFBQVFRSUFBSUlFQUFBRUNRQUFDQklBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FBQVFKQUFBSUFnQVFBQVFRSUFBSUlFQUFBRUNRQUFDQklBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNQb2JZUjNHczU4aVJGUUFBQUFBU1VWT1JLNUNZSUk9IiwgInNpemVzIjogIjUxMng1MTIiLCAidHlwZSI6ICJpbWFnZS9wbmciLCAicHVycG9zZSI6ICJtYXNrYWJsZSJ9XX0=">
+<meta name="theme-color" content="#1B0F18">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAFCUlEQVR4nO3cvXEbRxzG4QNHuVLOyJFbcKKINbgDdeBi1AE7cA2KmLgFR9YMU1UgBxpK/MAB97F7e7fv8+TCHYH/b3cBEjoNO/Ph/e331vdAPV+/PZ5a38NzTW/GsDMMbaPY/MKGnku2jmGzixl85tgqhOoXMfisUTuEag9u8CmpVgjFH9TgU1PpEG5KPpjhp7bSM1akJoNPCyV2g9U7gOGnlRKztyoAw09ra2dwcQCGn71YM4uLAjD87M3SmZwdgOFnr5bM5qwADD97N3dGJwdg+DmKObM6KQDDz9FMndmrARh+jmrK7Bb9Uwg4mosBWP05umszPBqA4acXl2bZEYhoZwOw+tObsZm2AxDtTQBWf3p1brbtAER7EYDVn969nnE7ANF+BmD1J8XzWbcDEE0ARLsZBscf8jzNvB2AaAIg2rvWN7BHD/d3rW+hmo+fvrS+hV2xA7zS8/APQ/8/31wnb4B/SRoOO8EPdgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAJ4JuXPA1J+zikE8Ervw9H7zzeXP4Yjmh2AaAIgmgCIJgCiCYBo0V+KT/oK5CXJH41G7gAG/6WH+7vY5yTu9wCpL/RUabtB5A4AT6ICsPpfl/YcRb8JfpK27T8ZG/aH+7uY5yRmBxh7sVNe6HOSf/YnEQEY/nFjz0HKUSgiAJZJiKD7AKz+1yU/F10HkLCClZJ6FOo6gDHJK94SPUfQbQCOPvMlPjfdBsAyaUehLgOw+tfRYwTdBWD410t6rroLgDJSjkJdBWD130ZPEXQTQE8vyl4kLBzdBDAm4UWsqfejUBcBOPq00UMEXQRAXT0vJIcPwOq/jV6PQocOwPDvw5EjOHQAbKvHheWwAVj92+jtKHTYAKCErgKw+m+jp+e5qwBgLgEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRAtHetb6B3f//1++rH+PPzvwXuhHPsABWVGP6Sj8NbAqik9NCKoA4BEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAFUUvprjL4WWYcAKio1tIa/Hl+Kr8zw7psdgGgCIJoj0Exr/3eGKUeiLa7BD3aAGUr81yTXHmOLa/CLACYqOVRjj7XFNXhJAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBTFTyW1Zjj7XFNXjp9OH97ffWN7HEw/1dk+s+/vPfqn9/+8dvu7hGDR8/fWly3TV8J3imLYar1QAncgQimgAo4ojHn2E4cABHfcJ7dOTX4jQMw3DUN8Kwxtdvj6fD7gBQggCIJgCiCYBoN8Pw481A6xuBLT3NvB2AaAIg2s8AHINI8XzW7QBEexGAXYDevZ5xOwDR3gRgF6BX52bbDkC0swHYBejN2EzbAYg2GoBdgF5cmuWLO4AIOLprM+wIRLSrAdgFOKopsztpBxABRzN1ZicfgUTAUcyZ1VnvAUTA3s2d0dlvgkXAXi2ZzUWfAomAvVk6k4s/BhUBe7FmFlf9HkAEtLZ2Blf/IkwEtFJi9ooOr/9jlC2UXHSL/imE3YDaSs9YtYG1G1BSrcW1+ootBNaofarY7MgiBObY6ji9+ZldCFyy9fvIpm9axcAwtP3wZHef2oiib3v7pPB/O315JywSzgQAAAAASUVORK5CYII=" type="image/png">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAEkUlEQVR4nO3cz3ETSRjG4ZGLO1equG0UnIhhMyCDDWYzIANi4EQUe6OKKxGwB0qUwTPS/OlWT7/9PHfbo9HPnz9Lbl+mE3j7+s2P1tfAcV+/f7u0voYmFyDgMbQI/GFfUMRje1TcVb+IiJlTM+4qn1jIrFEj7KfSn1DMrFWjlWLfIULmiFLTusiEFjNHlWro0HeFkKnhyLTePaHFTC1H2toVtJipbW9jm4MWM4+yp7VNQYuZR9va3OqgxUwrW9pbFbSYaW1tg3eDFjNnsabF4m99Q0s3gzadOZt7TS4GLWbO6labVg6izAZtOnN2S42+CFrM9GKuVSsHUX4L2nSmN382a0ITRdBE+RW0dYNePW/XhCaKoInyNE3WDfp3bdiEJoqgifKq9QWcwZeP71tfQjHvPnxufQlNXUbfn5Nivho56qFXjsSYpyn3ca0xdNDkETRRBE0UQRNF0EQRNFEETRRBE0XQRBk66NS3iFMf1xpDBz1NeU9+2uPZavg/TiLL8BOaLIImiqCJImiiCJooQ50pHPkkxygv5w0xoUcO+WqUexD/OvQoT+Ra6ZN6iAnNOKKDNp1fSr8nsSvHrScu/cfu1Yj3IHpCz0l9IueM9FivIoNemkwjPsFLjzl19YgMmnUSo44L2nR+aaTHHhV04sQpZZTVIyroJSNNqD2Soo4J2qpx3wj3IiLopAlTW/rqERH0khEm0h7JUXcftFWjrN6j7jro3m9+S6nf8F0HvST1ySotcfXoNmirRl29Rt1t0JSRNgC6DNp0Litp9egu6B5vcs96u9/dBb3EdD4m5f51FbRVo66E1aOroOGe7oM2ncvq/X52HzQ8J2iiCJoogiaKoIkiaKIImiiCJoqgiSJoogiaKIImiqCJImiiCJoogiaKoIkiaKIImiiCJoqgiSJoogiaKIImyqvWF5Dk0z9/7f7Yv//9r+CVjMuELuRIzCU+np8EXUCpGEV9nKCJImiiCJoogiaKoIkiaKIImiiCJoqgiSJoogiaKIImiqCJImiiCLqAUn+c74/8jxN0IUdjFHMZjmAVJMr2TGiimNA31D706lBteSb0gtqHXh2qrUPQM2ofenWoth5BE0XQRBE0UQRNFEETRdBEETRRBE0UQRNF0EQRNFEETRRBE0XQRBH0jNqHXh2qrUfQC2ofenWoto7L29dvfrS+iLW+fHzf+hKG9e7D59aXsIoJTRRBE6WrlWOarB2P1suqcdXdhO7tBvNYl2mapt6mNMz5+v3bpbsJDbcImiiCJsrTNP3cPVpfCBxxbdiEJoqgifIraGsHvXrerglNFEET5begrR305s9mTWiivAjalKYXc63OTmhRc3ZLjVo5iLIYtCnNWd1q8+aEFjVnc69JKwdR7gZtSnMWa1pcNaFFTWtrG1y9coiaVra0t2mHFjWPtrW5zb8UippH2dParlc5RE1texvb/bKdqKnlSFtFovSPaiihxJAs8saKac1RpRoqHqJpzRalh2Hxt75Na9aq0UrV+Exr5tQceg+bpuIe26N+cjdZD8Q9hhbr5yn2XYFnOMPvT/8DhZtiv2sTEwkAAAAASUVORK5CYII=">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="БезЦукру">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1B0F18;
+    --bg-soft:#241720;
+    --card:#2C1826;
+    --card-hi:#341E2E;
+    --line: rgba(243,233,227,0.09);
+    --cream:#F3E9E3;
+    --cream-dim: rgba(243,233,227,0.58);
+    --cream-faint: rgba(243,233,227,0.32);
+    --honey:#CB7D3A;
+    --honey-dim: rgba(203,125,58,.16);
+    --berry:#C97B93;
+    --berry-dim: rgba(201,123,147,.16);
+    --mint:#E3B056;
+    --mint-dim: rgba(227,176,86,.16);
+    --radius: 22px;
+    --radius-sm: 13px;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background: radial-gradient(120% 90% at 50% -10%, #2E1826 0%, var(--bg) 55%, #110A10 100%);
+    color: var(--cream);
+    font-family: 'Manrope', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+  h1,h2,h3,.display{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  button{ font-family: inherit; }
+  #app{
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+  }
+
+  /* ---------- Topbar ---------- */
+  .topbar{
+    padding: calc(16px + var(--safe-top)) clamp(14px,4.5vw,20px) 14px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap: 8px;
+  }
+  .brand{ display:flex; align-items:center; gap:9px; min-width:0; }
+  .brand-mark{ width:22px; height:22px; flex:none; }
+  .brand-name{ font-family:'Fraunces',serif; font-size:clamp(15px,4.2vw,17px); font-weight:600; letter-spacing:0.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .day-chip{
+    background: var(--honey-dim);
+    color: var(--honey);
+    border: 1px solid rgba(232,163,61,.28);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: clamp(11px,3vw,12.5px);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    flex: none;
+  }
+
+  main{ flex:1; padding: 0 clamp(14px,4.5vw,20px) calc(96px + var(--safe-bottom)); }
+  section.tab{ display:none; animation: fade .35s ease; }
+  section.tab.active{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+
+  .eyebrow{
+    font-size: 12px; font-weight:700; letter-spacing:0.11em; text-transform:uppercase;
+    color: var(--mint); margin: 4px 0 2px;
+  }
+
+  /* ---------- Hero / jar ---------- */
+  .hero{ text-align:center; padding: 6px 0 18px; }
+  .streak-num{
+    font-family:'Fraunces',serif; font-weight:700; font-size:clamp(52px,17vw,78px); line-height:0.95;
+    background: linear-gradient(180deg, var(--cream) 10%, var(--mint) 130%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .streak-label{ color:var(--cream-dim); font-size:clamp(12.5px,3.6vw,14px); margin-top:4px; }
+  .jar-wrap{ display:flex; justify-content:center; margin: 10px 0 4px; }
+  .jar-wrap svg{ width: clamp(120px,34vw,168px); height:auto; }
+  .jar-caption{ font-size:clamp(11.5px,3.2vw,12.5px); color:var(--cream-faint); margin-top:2px; padding: 0 8px; }
+
+  .cube{ transition: opacity .55s ease, transform .55s ease; transform-origin: center; }
+  .cube.gone{ opacity:0; transform: translateY(-14px) scale(.4) rotate(12deg); }
+
+  /* ---------- Cards ---------- */
+  .card{
+    background: linear-gradient(180deg, var(--card-hi), var(--card));
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: clamp(14px,4vw,18px);
+    margin-bottom: 14px;
+  }
+  .card-title{ font-size:clamp(14px,3.8vw,15px); font-weight:700; margin:0 0 3px; }
+  .card-sub{ font-size:clamp(12.5px,3.4vw,13px); color:var(--cream-dim); margin:0 0 14px; line-height:1.5;}
+
+  .checkin-row{ display:flex; gap:8px; flex-wrap:wrap; }
+  .btn{
+    flex:1; min-width:120px; border:none; border-radius: var(--radius-sm); padding: 14px 8px;
+    font-weight:700; font-size:clamp(13px,3.6vw,14.5px); cursor:pointer; transition: transform .12s ease, filter .2s ease;
+  }
+  .btn:active{ transform: scale(.96); }
+  .btn-clean{ background: var(--mint); color:#1B0F18; }
+  .btn-slip{ background: transparent; color: var(--berry); border: 1.5px solid rgba(201,117,117,.45); }
+  .btn-slip:hover{ background: var(--berry-dim); }
+  .btn-ghost{
+    width:100%; background: transparent; border: 1.5px solid var(--line); color: var(--cream);
+    border-radius: var(--radius-sm); padding: 13px; font-weight:700; font-size:14px; cursor:pointer;
+  }
+  .checked-note{
+    display:flex; align-items:center; gap:10px; padding: 4px 2px;
+    font-size:14px; color: var(--cream-dim);
+  }
+  .checked-note b{ color: var(--cream); }
+
+  .sos-btn{
+    width:100%; display:flex; align-items:center; justify-content:center; gap:9px;
+    background: var(--berry-dim); color: var(--berry); border: 1px solid rgba(201,117,117,.3);
+    border-radius: var(--radius-sm); padding:15px; font-weight:800; font-size:14.5px; cursor:pointer;
+  }
+
+  .quote{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:500; font-size:clamp(14.5px,4.2vw,16.5px);
+    line-height:1.5; color: var(--cream);
+  }
+
+  /* ---------- Progress tab ---------- */
+  .stat-grid{ display:grid; grid-template-columns: 1fr 1fr 1fr; gap:8px; margin-bottom:14px; }
+  .stat{
+    background: var(--card); border:1px solid var(--line); border-radius: var(--radius-sm);
+    padding: 12px 6px; text-align:center; min-width:0;
+  }
+  .stat-num{ font-family:'Fraunces',serif; font-weight:700; font-size:clamp(19px,5.5vw,23px); color:var(--honey); }
+  .stat-lbl{ font-size:clamp(9.5px,2.6vw,10.5px); color:var(--cream-faint); margin-top:2px; letter-spacing:0.01em; }
+
+  .cal-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .cal-nav{ background:none; border:none; color:var(--cream-dim); font-size:18px; cursor:pointer; padding:4px 10px; }
+  .cal-title{ font-weight:700; font-size:14.5px; }
+  .cal-grid{ display:grid; grid-template-columns: repeat(7,1fr); gap:clamp(3px,1.3vw,6px); }
+  .cal-dow{ text-align:center; font-size:clamp(9.5px,2.6vw,10.5px); color:var(--cream-faint); padding-bottom:4px; }
+  .cal-cell{
+    aspect-ratio:1; border-radius:9px; display:flex; align-items:center; justify-content:center;
+    font-size:clamp(10.5px,3vw,12px); color:var(--cream-dim); border:1px solid transparent;
+  }
+  .cal-cell.clean{ background: var(--mint-dim); color: var(--mint); font-weight:700; }
+  .cal-cell.slip{ background: var(--berry-dim); color: var(--berry); font-weight:700; }
+  .cal-cell.today{ border-color: var(--honey); }
+  .cal-cell.empty{ visibility:hidden; }
+
+  .legend{ display:flex; gap:16px; margin-top:12px; font-size:12px; color:var(--cream-dim); }
+  .legend span{ display:inline-flex; align-items:center; gap:6px; }
+  .dot{ width:9px; height:9px; border-radius:50%; }
+
+  /* ---------- savings card ---------- */
+  .save-setup .field-label{ font-size:13px; color:var(--cream-dim); margin: 12px 0 6px; }
+  .save-setup .field-label:first-child{ margin-top:0; }
+  .field-input-wrap{ position:relative; }
+  .field-input-wrap input{
+    width:100%; background: var(--bg-soft); border:1px solid var(--line); border-radius: var(--radius-sm);
+    padding: 12px 44px 12px 14px; color: var(--cream); font-size:16px; font-family:inherit;
+  }
+  .field-input-wrap span{
+    position:absolute; right:14px; top:50%; transform:translateY(-50%);
+    color: var(--cream-faint); font-size:13px; pointer-events:none;
+  }
+  .save-hero{ text-align:center; padding: 4px 0 6px; }
+  .save-num{
+    font-family:'Fraunces',serif; font-weight:700; font-size:clamp(34px,10.5vw,46px);
+    color: var(--mint); line-height:1;
+  }
+  .save-num-lbl{ font-size:12.5px; color:var(--cream-dim); margin-top:6px; }
+  .save-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px; }
+  .save-grid .stat{ padding: 12px 6px; }
+  .save-edit{
+    display:block; margin: 14px auto 0; background:none; border:none; color: var(--cream-faint);
+    font-size:12px; text-decoration: underline; cursor:pointer;
+  }
+  .save-basis{ font-size:11.5px; color:var(--cream-faint); text-align:center; margin-top:6px; line-height:1.5; }
+
+  /* ---------- Cravings tab ---------- */
+  .breath-wrap{ display:flex; flex-direction:column; align-items:center; padding: 10px 0 4px; }
+  .breath-circle{
+    width: clamp(130px,38vw,170px); height: clamp(130px,38vw,170px); border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, var(--mint-dim), transparent 70%), var(--card-hi);
+    border: 1.5px solid var(--mint);
+    display:flex; align-items:center; justify-content:center;
+    transition: transform 4s ease-in-out;
+    transform: scale(0.72);
+  }
+  .breath-circle.expand{ transform: scale(1); }
+  .breath-phase{ font-family:'Fraunces',serif; font-size:clamp(13.5px,4vw,16px); font-weight:600; text-align:center; padding:0 16px;}
+  .breath-caption{ margin-top:16px; font-size:clamp(12px,3.3vw,13px); color:var(--cream-dim); text-align:center; }
+
+  .tip-carousel{ position:relative; }
+  .tip-card{ background: var(--honey-dim); border:1px solid rgba(232,163,61,.25); border-radius: var(--radius-sm); padding:16px; }
+  .tip-num{ font-size:11px; font-weight:800; color:var(--honey); letter-spacing:.06em; }
+  .tip-text{ font-size:14.5px; margin-top:6px; line-height:1.5; }
+  .tip-nav{ display:flex; justify-content:space-between; margin-top:12px; }
+  .tip-nav button{ background:none; border:none; color:var(--cream-dim); font-size:13px; font-weight:700; cursor:pointer; }
+
+  .craving-count{ display:flex; align-items:center; justify-content:space-between; }
+  .craving-count .stat-num{ font-size:28px; }
+
+  /* ---------- Reasons tab ---------- */
+  .timeline{ position:relative; padding-left: 26px; }
+  .timeline::before{ content:''; position:absolute; left:6px; top:6px; bottom:6px; width:1.5px; background: var(--line); }
+  .t-item{ position:relative; padding-bottom:20px; }
+  .t-item:last-child{ padding-bottom:0; }
+  .t-dot{ position:absolute; left:-26px; top:2px; width:13px; height:13px; border-radius:50%; background: var(--bg); border:2px solid var(--mint); }
+  .t-day{ font-size:11px; font-weight:800; color:var(--mint); letter-spacing:.05em; text-transform:uppercase; }
+  .t-text{ font-size:13.5px; color: var(--cream-dim); margin-top:3px; line-height:1.5; }
+
+  .reason-item{
+    display:flex; align-items:flex-start; gap:10px; padding:11px 0; border-bottom:1px solid var(--line);
+    font-size:14px;
+  }
+  .reason-item:last-child{ border-bottom:none; }
+  .reason-item .rm{ margin-left:auto; background:none; border:none; color:var(--cream-faint); cursor:pointer; font-size:16px; flex:none; }
+  .reason-mark{ color: var(--honey); flex:none; }
+  .add-row{ display:flex; gap:8px; margin-top:12px; }
+  .add-row input{
+    flex:1; min-width:0; background: var(--bg-soft); border:1px solid var(--line); border-radius: var(--radius-sm);
+    padding: 12px 14px; color: var(--cream); font-size:16px; font-family:inherit;
+  }
+  .add-row input::placeholder{ color: var(--cream-faint); }
+  .add-row button{
+    background: var(--honey); color:#231303; border:none; border-radius: var(--radius-sm);
+    width:46px; flex:none; font-size:20px; font-weight:800; cursor:pointer;
+  }
+  .empty-hint{ font-size:13px; color:var(--cream-faint); text-align:center; padding:14px 0 6px; }
+
+  /* ---------- info lists (harm facts / benefits) ---------- */
+  .info-list{ display:flex; flex-direction:column; gap:13px; }
+  .info-item{ display:flex; gap:11px; align-items:flex-start; }
+  .info-ic{
+    flex:none; width:26px; height:26px; border-radius:9px; margin-top:1px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:800; font-family:'Fraunces',serif;
+  }
+  .info-ic.warn{ background:var(--berry-dim); color:var(--berry); }
+  .info-ic.good{ background:var(--mint-dim); color:var(--mint); }
+  .info-text{ font-size:13.5px; line-height:1.5; color:var(--cream-dim); padding-top:2px; }
+  .info-text b{ color:var(--cream); }
+
+  /* ---------- recovery chart ---------- */
+  .chart-legend{ display:flex; gap:16px; margin-bottom:10px; font-size:12px; color:var(--cream-dim); }
+  .chart-legend span{ display:inline-flex; align-items:center; gap:6px; }
+  .chart-legend i{ width:14px; height:2.5px; border-radius:2px; display:inline-block; }
+  .chart-note{ font-size:11.5px; color:var(--cream-faint); margin-top:10px; line-height:1.5; }
+
+  /* ---------- Tab bar ---------- */
+  .tabbar{
+    position:fixed; left:50%; transform:translateX(-50%); bottom: calc(12px + var(--safe-bottom));
+    width: calc(100% - clamp(20px,6vw,32px)); max-width: 448px;
+    background: rgba(27,59,46,0.85); backdrop-filter: blur(14px);
+    border:1px solid var(--line); border-radius: 20px;
+    display:flex; padding: 6px;
+  }
+  .tab-btn{
+    flex:1; min-width:0; background:none; border:none; color: var(--cream-faint); cursor:pointer;
+    display:flex; flex-direction:column; align-items:center; gap:3px;
+    padding: 7px 1px; border-radius:14px; font-size:clamp(9px,2.6vw,10.5px); font-weight:700; letter-spacing:0.005em;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    transition: color .2s ease, background .2s ease;
+  }
+  .tab-btn.active{ color: var(--bg); background: var(--cream); }
+  .tab-btn svg{ width:18px; height:18px; flex:none; }
+
+  .toast{
+    position:fixed; left:50%; top: calc(14px + var(--safe-top)); transform: translateX(-50%) translateY(-140%);
+    background: var(--cream); color: var(--bg); padding: 11px 18px; border-radius: 999px;
+    font-size:13px; font-weight:700; z-index:50; transition: transform .35s cubic-bezier(.2,.9,.3,1.2);
+    white-space:nowrap;
+  }
+  .toast.show{ transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div class="topbar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 24 24" fill="none"><path d="M7 3c-2 3-3 5-3 8a8 8 0 0016 0c0-3-1-5-3-8-1 3-2 4-3 3-1-2 0-3-1-5-2 2-2 4-3 6-1-2-2-3-3-4z" fill="#E3B056"/></svg>
+      <span class="brand-name">БезЦукру</span>
+    </div>
+    <div class="day-chip" id="dayChip">День 1</div>
+  </div>
+
+  <main>
+
+    <!-- ===== TODAY ===== -->
+    <section class="tab active" data-tab="today">
+      <div class="hero">
+        <div class="streak-num" id="streakNum">0</div>
+        <div class="streak-label" id="streakLabel">днів поспіль без цукру</div>
+        <div class="jar-wrap"><svg id="jarSvg" viewBox="0 0 168 176"></svg></div>
+        <div class="jar-caption" id="jarCaption">30 кубиків — твоя банка звички</div>
+      </div>
+
+      <div class="card">
+        <p class="card-title">Як сьогодні?</p>
+        <p class="card-sub" id="todaySub">Відміться, коли будеш готовий(-а) — це займе секунду.</p>
+        <div id="checkinArea"></div>
+      </div>
+
+      <div class="card">
+        <p class="card-title">На сьогодні</p>
+        <p class="quote" id="dailyQuote">—</p>
+      </div>
+
+      <button class="sos-btn" id="sosBtn">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" transform="rotate(45 12 12)"/></svg>
+        Відчуваю тягу зараз — допоможи
+      </button>
+    </section>
+
+    <!-- ===== PROGRESS ===== -->
+    <section class="tab" data-tab="progress">
+      <p class="eyebrow">Твій шлях</p>
+      <h2 style="margin:0 0 16px;">Прогрес</h2>
+
+      <div class="stat-grid">
+        <div class="stat"><div class="stat-num" id="statLongest">0</div><div class="stat-lbl">рекордна серія</div></div>
+        <div class="stat"><div class="stat-num" id="statTotal">0</div><div class="stat-lbl">чистих днів</div></div>
+        <div class="stat"><div class="stat-num" id="statRate">0%</div><div class="stat-lbl">успішність</div></div>
+      </div>
+
+      <div class="card">
+        <div class="cal-head">
+          <button class="cal-nav" id="calPrev">‹</button>
+          <div class="cal-title" id="calTitle">—</div>
+          <button class="cal-nav" id="calNext">›</button>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="legend">
+          <span><i class="dot" style="background:var(--mint)"></i>без цукру</span>
+          <span><i class="dot" style="background:var(--berry)"></i>зірвався(-лась)</span>
+        </div>
+      </div>
+      <div class="card" id="saveCard"></div>
+    </section>
+
+    <!-- ===== CRAVINGS ===== -->
+    <section class="tab" data-tab="cravings">
+      <p class="eyebrow">SOS</p>
+      <h2 style="margin:0 0 16px;">Пережити тягу</h2>
+
+      <div class="card">
+        <p class="card-title">Дихання «квадрат»</p>
+        <p class="card-sub">4 секунди вдих — 4 затримка — 4 видих — 4 пауза. Одне коло займає 16 секунд.</p>
+        <div class="breath-wrap">
+          <div class="breath-circle" id="breathCircle"><div class="breath-phase" id="breathPhase">Натисни, щоб почати</div></div>
+          <div class="breath-caption" id="breathCaption">Тяга зазвичай минає за 3–5 хвилин, навіть без боротьби.</div>
+        </div>
+        <button class="btn-ghost" id="breathToggle" style="margin-top:16px;">Почати дихання</button>
+      </div>
+
+      <div class="card tip-carousel">
+        <p class="card-title">Що можна зробити прямо зараз</p>
+        <div class="tip-card">
+          <div class="tip-num" id="tipNum">ПОРАДА 1 / 6</div>
+          <div class="tip-text" id="tipText">—</div>
+        </div>
+        <div class="tip-nav">
+          <button id="tipPrev">← Інша</button>
+          <button id="tipNext">Наступна →</button>
+        </div>
+      </div>
+
+      <div class="card craving-count">
+        <div>
+          <p class="card-title" style="margin-bottom:2px;">Тяг подолано</p>
+          <p class="card-sub" style="margin-bottom:0;">Кожна відмічена — доказ, що ти можеш почекати.</p>
+        </div>
+        <div style="text-align:right;">
+          <div class="stat-num" id="cravingCount">0</div>
+          <button class="btn-ghost" id="logCraving" style="margin-top:8px; padding:9px 14px; font-size:12.5px;">+ Відмітити</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== REASONS ===== -->
+    <section class="tab" data-tab="reasons">
+      <p class="eyebrow">Твоє «навіщо»</p>
+      <h2 style="margin:0 0 16px;">Причини</h2>
+
+      <div class="card">
+        <p class="card-title">Мої причини</p>
+        <p class="card-sub">Те, що нагадає тобі, навіщо ти це почав(-ла), у важку мить.</p>
+        <div id="reasonsList"></div>
+        <div class="add-row">
+          <input id="reasonInput" placeholder="Наприклад: більше енергії вдень" maxlength="80">
+          <button id="reasonAdd">+</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="card-title">Чим шкодить надлишок цукру</p>
+        <p class="card-sub">Коротко про те, що відбувається в тілі, коли цукру забагато.</p>
+        <div class="info-list">
+          <div class="info-item"><div class="info-ic warn">!</div><div class="info-text"><b>Гойдалка глюкози.</b> Різкий підйом і падіння рівня цукру в крові після солодкого — головна причина втоми, дратівливості й "провалу" через 1–2 години.</div></div>
+          <div class="info-item"><div class="info-ic warn">!</div><div class="info-text"><b>Звикання мозку.</b> Цукор активує ту саму систему винагороди, що й інші залежності — тому хочеться "ще трохи" навіть без голоду.</div></div>
+          <div class="info-item"><div class="info-ic warn">!</div><div class="info-text"><b>Прискорене старіння шкіри.</b> Надлишок цукру пов'язують із глікацією колагену — шкіра швидше втрачає пружність.</div></div>
+          <div class="info-item"><div class="info-ic warn">!</div><div class="info-text"><b>Навантаження на печінку.</b> Надлишок фруктози метаболізується печінкою і може сприяти накопиченню жиру в ній.</div></div>
+          <div class="info-item"><div class="info-ic warn">!</div><div class="info-text"><b>Хронічне запалення.</b> Дослідження пов'язують надлишок цукру з низькорівневим запаленням у організмі.</div></div>
+          <div class="info-item"><div class="info-ic warn">!</div><div class="info-text"><b>Карієс.</b> Цукор — їжа для бактерій, які руйнують зубну емаль.</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="card-title">Що ти отримаєш, коли відмовишся</p>
+        <p class="card-sub">Це не миттєво — але от що зазвичай помічають першим.</p>
+        <div class="info-list">
+          <div class="info-item"><div class="info-ic good">✓</div><div class="info-text"><b>Стабільна енергія</b> без обідніх провалів і "цукрових гойдалок".</div></div>
+          <div class="info-item"><div class="info-ic good">✓</div><div class="info-text"><b>Кращий сон</b> — легше засинати, менше нічних пробуджень.</div></div>
+          <div class="info-item"><div class="info-ic good">✓</div><div class="info-text"><b>Чистіша шкіра</b> й менше запалень.</div></div>
+          <div class="info-item"><div class="info-ic good">✓</div><div class="info-text"><b>Менше тяги та перепадів настрою</b> протягом дня.</div></div>
+          <div class="info-item"><div class="info-ic good">✓</div><div class="info-text"><b>Легший контроль ваги</b> без відчуття постійного голоду.</div></div>
+          <div class="info-item"><div class="info-ic good">✓</div><div class="info-text"><b>Ясність мислення</b> й менше "туману в голові" після їжі.</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="card-title">Як тіло відновлюється з часом</p>
+        <p class="card-sub">Орієнтовна динаміка тяги та енергії за перші 30 днів без цукру.</p>
+        <div class="chart-legend">
+          <span><i style="background:var(--berry)"></i>Інтенсивність тяги</span>
+          <span><i style="background:var(--mint)"></i>Рівень енергії</span>
+        </div>
+        <svg viewBox="0 0 320 170" style="width:100%; height:auto;">
+          <line x1="30" y1="24" x2="300" y2="24" stroke="rgba(239,234,217,0.08)" stroke-width="1"/>
+          <line x1="30" y1="66" x2="300" y2="66" stroke="rgba(239,234,217,0.08)" stroke-width="1"/>
+          <line x1="30" y1="108" x2="300" y2="108" stroke="rgba(239,234,217,0.08)" stroke-width="1"/>
+          <line x1="30" y1="150" x2="300" y2="150" stroke="rgba(239,234,217,0.24)" stroke-width="1"/>
+          <line x1="30" y1="24" x2="30" y2="150" stroke="rgba(239,234,217,0.24)" stroke-width="1"/>
+
+          <polyline points="30,24 57,52 93,80 120,94 156,108 192,115 219,122 255,129 300,136"
+            fill="none" stroke="var(--berry)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="30,108 57,94 93,80 120,66 156,52 192,45 219,38 255,31 300,24"
+            fill="none" stroke="var(--mint)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <text x="30" y="164" font-size="9" fill="rgba(239,234,217,0.55)">День 0</text>
+          <text x="145" y="164" font-size="9" fill="rgba(239,234,217,0.55)">День 14</text>
+          <text x="278" y="164" font-size="9" fill="rgba(239,234,217,0.55)">День 30</text>
+        </svg>
+        <p class="chart-note">Ілюстративна узагальнена динаміка на основі типових спостережень людей, які відмовлялись від цукру — не медичний прогноз. У тебе може бути швидше, повільніше або нелінійно, і це нормально.</p>
+      </div>
+
+      <div class="card">
+        <p class="card-title">Що відбувається з тілом за днями</p>
+        <p class="card-sub">Орієнтовний таймлайн відмови від цукру.</p>
+        <div class="timeline">
+          <div class="t-item"><div class="t-dot"></div><div class="t-day">День 1–3</div><div class="t-text">Можливі перепади настрою й головний біль — це нормально, організм перелаштовується.</div></div>
+          <div class="t-item"><div class="t-dot"></div><div class="t-day">День 4–7</div><div class="t-text">Тяга стає рідшою і слабшою. Сон і енергія поступово стабілізуються.</div></div>
+          <div class="t-item"><div class="t-dot"></div><div class="t-day">День 8–14</div><div class="t-text">Смакові рецептори чутливіші — фрукти й ягоди відчуваються солодшими.</div></div>
+          <div class="t-item"><div class="t-dot"></div><div class="t-day">День 15–30</div><div class="t-text">Тяга виникає рідко й ситуативно. Шкіра та травлення часто помітно кращі.</div></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="tabbar">
+    <button class="tab-btn active" data-tab="today">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M7 3c-2 3-3 5-3 8a8 8 0 0016 0c0-3-1-5-3-8-1 3-2 4-3 3-1-2 0-3-1-5-2 2-2 4-3 6-1-2-2-3-3-4z" stroke="currentColor" stroke-width="1.6"/></svg>
+      Сьогодні
+    </button>
+    <button class="tab-btn" data-tab="progress">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 20V10M11 20V4M18 20v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      Прогрес
+    </button>
+    <button class="tab-btn" data-tab="cravings">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M3 12c3-4 5-6 9-6s6 2 9 6c-3 4-5 6-9 6s-6-2-9-6z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2.3" stroke="currentColor" stroke-width="1.6"/></svg>
+      Тяга
+    </button>
+    <button class="tab-btn" data-tab="reasons">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 4h9l4 4v12H6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 11h6M9 15h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      Причини
+    </button>
+  </div>
+
+  <div class="toast" id="toast">Збережено</div>
+</div>
+
+<script>
+(function(){
+  const STORAGE_KEY = 'sugarfree:state';
+  const TOTAL_CUBES = 30;
+  const TIPS = [
+    "Випий велику склянку води й почекай 5 хвилин — тяга часто це просто спрага.",
+    "З'їж жменю горіхів або шматочок фрукта: цукор у крові стабілізується без солодкого.",
+    "Почисти зуби — м'ятний смак приглушує бажання з'їсти щось солодке.",
+    "Вийди на 3-хвилинну прогулянку або зроби 15 присідань — тяга падає разом із гормонами стресу.",
+    "Напиши в нотатках, що ти відчуваєш прямо зараз. Часто це не голод, а нудьга або втома.",
+    "Подзвони чи напиши комусь на 2 хвилини — переключення уваги працює краще, ніж боротьба."
+  ];
+  const QUOTES = [
+    "Кожен спокійний день — це нова звичка, яка закріплюється.",
+    "Тяга — це хвиля. Вона підіймається і завжди опадає, якщо не годувати її цукром.",
+    "Ти не позбавляєш себе радості — ти повертаєш собі контроль.",
+    "Маленький вибір сьогодні. Велика різниця через місяць.",
+    "Смак без цукру відкривається повільно. Дай собі час.",
+    "Не ідеальність важлива, а те, що ти продовжуєш."
+  ];
+
+  let state = null;
+  let calViewDate = new Date();
+  let breathing = false, breathTimer = null, breathPhaseIdx = 0;
+  const BREATH_PHASES = ["Вдих…","Затримай…","Видих…","Пауза…"];
+
+  function todayStr(d){
+    d = d || new Date();
+    return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  }
+  function addDays(dateStr, n){
+    const d = new Date(dateStr+'T00:00:00');
+    d.setDate(d.getDate()+n);
+    return todayStr(d);
+  }
+  function defaultState(){
+    return { startDate: todayStr(), checkins: {}, cravingCount: 0, reasons: [], dailySpend: null, treatsPerDay: null };
+  }
+
+  // Uses Claude's built-in artifact storage when available (works whenever this
+  // artifact is opened via its Claude link, tied to your account). Falls back to
+  // the browser's own localStorage when the file is opened directly (e.g. saved
+  // to your phone and opened outside Claude), so progress is never lost either way.
+  const hasClaudeStorage = () => (typeof window.storage !== 'undefined' && window.storage && typeof window.storage.get === 'function');
+
+  async function loadState(){
+    if(hasClaudeStorage()){
+      try{
+        const r = await window.storage.get(STORAGE_KEY, false);
+        if(r && r.value) return JSON.parse(r.value);
+        return defaultState();
+      }catch(e){ /* key not found yet, or storage errored — fall through */ }
+    }
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw) return JSON.parse(raw);
+    }catch(e){}
+    return defaultState();
+  }
+  async function saveState(){
+    let savedRemotely = false;
+    if(hasClaudeStorage()){
+      try{ await window.storage.set(STORAGE_KEY, JSON.stringify(state), false); savedRemotely = true; }
+      catch(e){ console.error('Claude storage save failed, falling back to localStorage', e); }
+    }
+    if(!savedRemotely){
+      try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+      catch(e){ console.error('localStorage save failed', e); }
+    }
+  }
+
+  function showToast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'), 1600);
+  }
+
+  // ---------- streak math ----------
+  function currentStreak(){
+    let d = state.checkins[todayStr()] ? todayStr() : addDays(todayStr(),-1);
+    let n = 0;
+    while(state.checkins[d] === 'clean'){
+      n++;
+      d = addDays(d,-1);
+    }
+    return n;
+  }
+  function longestStreak(){
+    const dates = Object.keys(state.checkins).sort();
+    let best = 0, run = 0, prev = null;
+    for(const d of dates){
+      if(state.checkins[d] !== 'clean'){ run = 0; prev = d; continue; }
+      if(prev && addDays(prev,1) === d) run++; else run = 1;
+      best = Math.max(best, run);
+      prev = d;
+    }
+    return best;
+  }
+  function totalClean(){
+    return Object.values(state.checkins).filter(v=>v==='clean').length;
+  }
+  function successRate(){
+    const total = Object.keys(state.checkins).length;
+    if(!total) return 0;
+    return Math.round((totalClean()/total)*100);
+  }
+
+  // ---------- jar SVG ----------
+  function buildJar(){
+    const svg = document.getElementById('jarSvg');
+    svg.innerHTML = '';
+    const ns = 'http://www.w3.org/2000/svg';
+    const outline = document.createElementNS(ns,'path');
+    outline.setAttribute('d','M54 12 H114 V30 C114 34 118 36 122 40 C136 54 140 68 140 96 C140 138 116 164 84 164 C52 164 28 138 28 96 C28 68 32 54 46 40 C50 36 54 34 54 30 Z');
+    outline.setAttribute('fill','rgba(239,234,217,0.04)');
+    outline.setAttribute('stroke','rgba(239,234,217,0.4)');
+    outline.setAttribute('stroke-width','2');
+    svg.appendChild(outline);
+
+    const lid = document.createElementNS(ns,'rect');
+    lid.setAttribute('x','50'); lid.setAttribute('y','6'); lid.setAttribute('width','68'); lid.setAttribute('height','10');
+    lid.setAttribute('rx','4'); lid.setAttribute('fill','#E3B056');
+    svg.appendChild(lid);
+
+    const cols = 5, rows = 6, cw = 15, gap = 4;
+    const startX = 84 - (cols*cw + (cols-1)*gap)/2;
+    const startY = 150;
+    for(let i=0;i<TOTAL_CUBES;i++){
+      const col = i % cols, row = Math.floor(i/cols);
+      const x = startX + col*(cw+gap);
+      const y = startY - row*(cw+gap);
+      const rect = document.createElementNS(ns,'rect');
+      rect.setAttribute('x', x); rect.setAttribute('y', y);
+      rect.setAttribute('width', cw); rect.setAttribute('height', cw);
+      rect.setAttribute('rx', 3);
+      rect.setAttribute('fill', i % 3 === 0 ? '#CB7D3A' : 'rgba(203,125,58,0.78)');
+      rect.classList.add('cube');
+      rect.dataset.index = i;
+      svg.appendChild(rect);
+    }
+  }
+  function renderJar(){
+    const streak = currentStreak();
+    const remaining = Math.max(0, TOTAL_CUBES - streak);
+    document.querySelectorAll('#jarSvg .cube').forEach(cube=>{
+      const idx = +cube.dataset.index;
+      cube.classList.toggle('gone', idx >= remaining);
+    });
+    const cap = document.getElementById('jarCaption');
+    if(streak >= TOTAL_CUBES){
+      cap.textContent = 'Банка порожня — 30-денний рубіж пройдено 🌿';
+    } else {
+      cap.textContent = remaining + ' із ' + TOTAL_CUBES + ' кубиків ще розчиняються';
+    }
+  }
+
+  // ---------- today tab ----------
+  function renderToday(){
+    const streak = currentStreak();
+    document.getElementById('streakNum').textContent = streak;
+    document.getElementById('streakLabel').textContent = streak === 1 ? 'день поспіль без цукру' : 'днів поспіль без цукру';
+    const daysSinceStart = Math.max(1, Math.round((new Date(todayStr()) - new Date(state.startDate))/86400000) + 1);
+    document.getElementById('dayChip').textContent = 'День ' + daysSinceStart;
+
+    document.getElementById('dailyQuote').textContent = QUOTES[daysSinceStart % QUOTES.length];
+
+    const area = document.getElementById('checkinArea');
+    const sub = document.getElementById('todaySub');
+    const t = todayStr();
+    if(state.checkins[t]){
+      const clean = state.checkins[t] === 'clean';
+      sub.textContent = 'Сьогоднішній день уже відмічено.';
+      area.innerHTML = '<div class="checked-note">'+
+        (clean ? '✓ <b>Без цукру.</b> Гарна робота сьогодні.' : '↺ <b>Був зрив.</b> Завтра — новий чистий старт.') +
+        '</div><button class="btn-ghost" id="undoBtn" style="margin-top:10px;">Змінити відмітку</button>';
+      document.getElementById('undoBtn').onclick = ()=>{ delete state.checkins[t]; saveState(); renderAll(); };
+    } else {
+      sub.textContent = 'Відміться, коли будеш готовий(-а) — це займе секунду.';
+      area.innerHTML = '<div class="checkin-row">'+
+        '<button class="btn btn-clean" id="cleanBtn">Так, без цукру</button>'+
+        '<button class="btn btn-slip" id="slipBtn">Зірвався(-лась)</button></div>';
+      document.getElementById('cleanBtn').onclick = ()=>{ state.checkins[t]='clean'; saveState(); showToast('Відмічено ✓'); renderAll(); };
+      document.getElementById('slipBtn').onclick = ()=>{ state.checkins[t]='slip'; saveState(); showToast('Записано. Завтра — заново.'); renderAll(); };
+    }
+    renderJar();
+  }
+
+  // ---------- progress tab ----------
+  const MONTHS_UK = ['Січень','Лютий','Березень','Квітень','Травень','Червень','Липень','Серпень','Вересень','Жовтень','Листопад','Грудень'];
+  const DOW_UK = ['Пн','Вт','Ср','Чт','Пт','Сб','Нд'];
+  function renderProgress(){
+    document.getElementById('statLongest').textContent = longestStreak();
+    document.getElementById('statTotal').textContent = totalClean();
+    document.getElementById('statRate').textContent = successRate() + '%';
+    renderCalendar();
+    renderSavings();
+  }
+  function fmtUAH(n){
+    return Math.round(n).toLocaleString('uk-UA') + ' ₴';
+  }
+  function renderSavings(edit){
+    const card = document.getElementById('saveCard');
+    const configured = state.dailySpend != null && state.treatsPerDay != null && !edit;
+    if(!configured){
+      card.innerHTML = `
+        <p class="card-title">Порахуємо, скільки економиш</p>
+        <p class="card-sub">Як у застосунках для тих, хто кидає курити — тільки тут про цукор. Дай орієнтовні цифри, решту порахуємо самі.</p>
+        <div class="save-setup">
+          <div class="field-label">Скільки в середньому витрачав(-ла) на солодке щодня?</div>
+          <div class="field-input-wrap"><input type="number" inputmode="decimal" min="0" id="spendInput" placeholder="100" value="${state.dailySpend ?? ''}"><span>₴/день</span></div>
+          <div class="field-label">Скільки порцій солодкого з'їдав(-ла) за день?</div>
+          <div class="field-input-wrap"><input type="number" inputmode="decimal" min="0" id="treatsInput" placeholder="3" value="${state.treatsPerDay ?? ''}"><span>шт/день</span></div>
+          <button class="btn-ghost" id="saveSetupBtn" style="margin-top:16px;">Порахувати економію</button>
+        </div>`;
+      document.getElementById('saveSetupBtn').onclick = ()=>{
+        const spend = parseFloat(document.getElementById('spendInput').value);
+        const treats = parseFloat(document.getElementById('treatsInput').value);
+        if(!(spend >= 0) || !(treats >= 0)){ showToast('Вкажи обидва числа'); return; }
+        state.dailySpend = spend;
+        state.treatsPerDay = treats;
+        saveState();
+        renderSavings();
+      };
+      return;
+    }
+    const days = totalClean();
+    const money = state.dailySpend * days;
+    const treats = state.treatsPerDay * days;
+    const sugarG = treats * 15;
+    card.innerHTML = `
+      <p class="card-title">Зекономлено відколи почав(-ла)</p>
+      <div class="save-hero">
+        <div class="save-num">${fmtUAH(money)}</div>
+        <div class="save-num-lbl">за ${days} ${days===1?'чистий день':'чистих днів'}</div>
+      </div>
+      <div class="save-grid">
+        <div class="stat"><div class="stat-num" style="font-size:20px;">${Math.round(treats)}</div><div class="stat-lbl">солодощів не з'їдено</div></div>
+        <div class="stat"><div class="stat-num" style="font-size:20px;">${sugarG.toLocaleString('uk-UA')} г</div><div class="stat-lbl">цукру уникнуто</div></div>
+      </div>
+      <p class="save-basis">Приблизно, на основі твоїх цифр: ${state.dailySpend}₴ і ${state.treatsPerDay} порц./день, ~15 г цукру на порцію.</p>
+      <button class="save-edit" id="saveEditBtn">Змінити суми</button>`;
+    document.getElementById('saveEditBtn').onclick = ()=> renderSavings(true);
+  }
+  function renderCalendar(){
+    const y = calViewDate.getFullYear(), m = calViewDate.getMonth();
+    document.getElementById('calTitle').textContent = MONTHS_UK[m] + ' ' + y;
+    const grid = document.getElementById('calGrid');
+    grid.innerHTML = '';
+    DOW_UK.forEach(d=>{
+      const el = document.createElement('div');
+      el.className='cal-dow'; el.textContent=d;
+      grid.appendChild(el);
+    });
+    const first = new Date(y,m,1);
+    let startOffset = first.getDay(); // 0 = Sunday
+    startOffset = startOffset === 0 ? 6 : startOffset - 1; // Monday-first
+    for(let i=0;i<startOffset;i++){
+      const el = document.createElement('div');
+      el.className='cal-cell empty';
+      grid.appendChild(el);
+    }
+    const daysInMonth = new Date(y,m+1,0).getDate();
+    const t = todayStr();
+    for(let day=1; day<=daysInMonth; day++){
+      const dateStr = y+'-'+String(m+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');
+      const el = document.createElement('div');
+      el.className = 'cal-cell';
+      if(state.checkins[dateStr] === 'clean') el.classList.add('clean');
+      else if(state.checkins[dateStr] === 'slip') el.classList.add('slip');
+      if(dateStr === t) el.classList.add('today');
+      el.textContent = day;
+      grid.appendChild(el);
+    }
+  }
+
+  // ---------- cravings tab ----------
+  let tipIdx = 0;
+  function renderTip(){
+    document.getElementById('tipNum').textContent = 'ПОРАДА ' + (tipIdx+1) + ' / ' + TIPS.length;
+    document.getElementById('tipText').textContent = TIPS[tipIdx];
+  }
+  function renderCravings(){
+    document.getElementById('cravingCount').textContent = state.cravingCount || 0;
+    renderTip();
+  }
+  function toggleBreathing(){
+    const circle = document.getElementById('breathCircle');
+    const phaseEl = document.getElementById('breathPhase');
+    const btn = document.getElementById('breathToggle');
+    breathing = !breathing;
+    if(breathing){
+      btn.textContent = 'Зупинити';
+      breathPhaseIdx = 0;
+      const step = ()=>{
+        phaseEl.textContent = BREATH_PHASES[breathPhaseIdx % 4];
+        circle.classList.toggle('expand', breathPhaseIdx % 4 === 0 || breathPhaseIdx % 4 === 1);
+        breathPhaseIdx++;
+      };
+      step();
+      breathTimer = setInterval(step, 4000);
+    } else {
+      clearInterval(breathTimer);
+      circle.classList.remove('expand');
+      phaseEl.textContent = 'Натисни, щоб почати';
+      btn.textContent = 'Почати дихання';
+    }
+  }
+
+  // ---------- reasons tab ----------
+  function renderReasons(){
+    const list = document.getElementById('reasonsList');
+    list.innerHTML = '';
+    if(!state.reasons.length){
+      list.innerHTML = '<p class="empty-hint">Поки що порожньо. Додай першу причину нижче.</p>';
+      return;
+    }
+    state.reasons.forEach((r, i)=>{
+      const row = document.createElement('div');
+      row.className = 'reason-item';
+      row.innerHTML = '<span class="reason-mark">●</span><span>'+escapeHtml(r)+'</span><button class="rm" data-i="'+i+'">✕</button>';
+      list.appendChild(row);
+    });
+    list.querySelectorAll('.rm').forEach(btn=>{
+      btn.onclick = ()=>{ state.reasons.splice(+btn.dataset.i,1); saveState(); renderReasons(); };
+    });
+  }
+  function escapeHtml(s){
+    const d = document.createElement('div'); d.textContent = s; return d.innerHTML;
+  }
+
+  // ---------- tabs ----------
+  function switchTab(name){
+    document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('active', s.dataset.tab===name));
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===name));
+  }
+
+  function renderAll(){
+    renderToday();
+    renderProgress();
+    renderCravings();
+    renderReasons();
+  }
+
+  async function init(){
+    buildJar();
+    state = await loadState();
+    if(!state.checkins) state = defaultState();
+    renderAll();
+
+    document.querySelectorAll('.tab-btn').forEach(b=>{
+      b.addEventListener('click', ()=>switchTab(b.dataset.tab));
+    });
+
+    document.getElementById('calPrev').onclick = ()=>{ calViewDate.setMonth(calViewDate.getMonth()-1); renderCalendar(); };
+    document.getElementById('calNext').onclick = ()=>{ calViewDate.setMonth(calViewDate.getMonth()+1); renderCalendar(); };
+
+    document.getElementById('sosBtn').onclick = ()=>switchTab('cravings');
+    document.getElementById('breathToggle').onclick = toggleBreathing;
+
+    document.getElementById('tipNext').onclick = ()=>{ tipIdx = (tipIdx+1)%TIPS.length; renderTip(); };
+    document.getElementById('tipPrev').onclick = ()=>{ tipIdx = (tipIdx-1+TIPS.length)%TIPS.length; renderTip(); };
+
+    document.getElementById('logCraving').onclick = ()=>{
+      state.cravingCount = (state.cravingCount||0)+1;
+      saveState();
+      renderCravings();
+      showToast('Ще одна подолана тяга 💪');
+    };
+
+    const addReason = ()=>{
+      const input = document.getElementById('reasonInput');
+      const val = input.value.trim();
+      if(!val) return;
+      state.reasons.push(val);
+      input.value = '';
+      saveState();
+      renderReasons();
+    };
+    document.getElementById('reasonAdd').onclick = addReason;
+    document.getElementById('reasonInput').addEventListener('keydown', e=>{ if(e.key==='Enter') addReason(); });
+  }
+
+  init();
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      const swSource = `
+        const CACHE = 'bezcukru-v1';
+        self.addEventListener('install', e => { self.skipWaiting(); });
+        self.addEventListener('activate', e => { self.clients.claim(); });
+        self.addEventListener('fetch', e => {
+          if (e.request.method !== 'GET') return;
+          e.respondWith(
+            caches.open(CACHE).then(cache =>
+              cache.match(e.request).then(cached => {
+                const fetchPromise = fetch(e.request).then(res => {
+                  cache.put(e.request, res.clone());
+                  return res;
+                }).catch(() => cached);
+                return cached || fetchPromise;
+              })
+            )
+          );
+        });
+      `;
+      const blob = new Blob([swSource], { type: 'application/javascript' });
+      const swUrl = URL.createObjectURL(blob);
+      navigator.serviceWorker.register(swUrl).catch(() => {});
+    });
+  }
+})();
+</script>
+</body>
+</html>
